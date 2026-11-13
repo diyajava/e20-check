@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>E20 Climate Fit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>
+:root{--bg:#FFFFFF;--surface:#FFFFFF;--ink:#0F2A1D;--muted:#55675D;--line:#DCE6DF;--brand:#0E7C4A;--brand-dark:#0A5C37;--tint:#F1F7F3;
+--eth:#12874F;--eth-soft:#DDF3E6;--pet:#D9822B;--pet-soft:#FCEBD7;--likely:#2B7BB9;--likely-soft:#DCEBF7;--risk:#C0392B;--risk-soft:#F9DEDA;
+--font-head:Poppins,system-ui,sans-serif;--font-body:Inter,system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left,0px))}
+.top{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--font-head);font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none}
+.logo b{color:var(--brand)}
+.top nav{display:flex;gap:22px}
+.top nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem}
+.top nav a:hover{color:var(--brand)}
+@media(max-width:560px){.top nav a:not(:last-child){display:none}}
+.hero{background:linear-gradient(135deg,#0A5C37 0%,#0E7C4A 55%,#19A064 100%);color:#fff;padding:84px 0 92px}
+.hero h1{font-family:var(--font-head);font-weight:700;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.1;margin:0 0 18px;max-width:16ch}
+.hero p{font-size:1.15rem;max-width:52ch;margin:0 0 30px;color:#DDF3E6}
+.btn{display:inline-block;background:#fff;color:var(--brand-dark);font-weight:600;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:1rem;border:0;cursor:pointer}
+.btn:hover{background:#F1F7F3}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);margin-left:10px}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+.chips{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,.14);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.95rem}
+section.block{padding:72px 0}
+section.alt{background:var(--tint)}
+h2.title{font-family:var(--font-head);font-weight:700;font-size:clamp(1.6rem,4vw,2.3rem);margin:0 0 12px;line-height:1.2}
+.sub{color:var(--muted);max-width:60ch;margin:0 0 32px;font-size:1.05rem}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media(max-width:720px){.steps{grid-template-columns:minmax(0,1fr)}}
+.step{background:#fff;border-radius:18px;padding:26px;box-shadow:0 2px 14px rgba(15,42,29,.07)}
+.step .n{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-family:var(--font-head)}
+.step h3{font-family:var(--font-head);margin:0 0 6px;font-size:1.1rem}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+.panel{background:#fff;border-radius:20px;padding:26px;box-shadow:0 4px 24px rgba(15,42,29,.09)}
+.panel h2{font-family:var(--font-head);font-size:1.25rem;margin:0 0 6px}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start;margin-top:20px}
+@media(max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
+label{display:block;font-weight:600;font-size:.95rem;margin:14px 0 6px}
+select{width:100%;font:inherit;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.range{width:100%;accent-color:var(--brand)}
+.val{font-weight:700;color:var(--brand)}
+.hint{font-size:.88rem;color:var(--muted);margin-top:6px}
+.src{font-size:.85rem;color:var(--muted)}
+.pill{display:inline-block;font-weight:600;font-size:.82rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+.t-ready{background:var(--eth-soft);color:var(--brand-dark)}
+.t-check{background:var(--pet-soft);color:#9A5A12}
+.result h3{font-family:var(--font-head)}
+.big{font-family:var(--font-head);font-weight:700;font-size:3.6rem;line-height:1.05;color:var(--brand)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin:6px 0 4px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.about p{max-width:68ch;color:var(--muted)}
+.about a,footer a{color:var(--brand)}
+footer{background:#0F2A1D;color:#B8C9BE;padding:40px 0;font-size:.92rem}
+footer a{color:#7FD6A8}
+footer strong{color:#fff;font-family:var(--font-head)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #D9822B;outline-offset:2px}
+.mapwrap{margin-top:8px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top">E20 <b>Climate Fit</b></a>
+  <nav><a href="#how">How it works</a><a href="#tool">Try it</a><a href="#about">About</a></nav>
+</div></header>
+
+<div class="hero" id="top"><div class="wrap">
+  <h1>The right ethanol blend depends on where you live.</h1>
+  <p>India is moving to E20 fuel, but humid coasts and dry highlands don't behave the same way. Pick your city and see which blend suits it, month by month.</p>
+  <a class="btn" href="#tool">Check my city</a><a class="btn ghost" href="#about">Read the research</a>
+  <div class="chips"><span class="chip">E10 · humid months</span><span class="chip">E20 · balanced months</span><span class="chip">E30 · cool, dry months</span></div>
+</div></div>
+
+<section class="block" id="how"><div class="wrap">
+  <h2 class="title">How it works</h2>
+  <p class="sub">Ethanol absorbs water from the air, and how well it performs depends on temperature. We use both to suggest a blend.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Choose a city</h3><p>Pick from about 30 Indian cities. Monthly temperature and humidity are loaded from NASA data.</p></div>
+    <div class="step"><div class="n">2</div><h3>Apply the framework</h3><p>Above 70% humidity points to E10. Warm, moderate months suit E20. Cool, dry months suit E30.</p></div>
+    <div class="step"><div class="n">3</div><h3>See the year</h3><p>A chart shows which blend fits each month, and a map shows where your city sits.</p></div>
+  </div>
+</div></section>
+
+<section class="block alt" id="tool"><div class="wrap">
+  <h2 class="title">Which blend fits your city?</h2>
+  <p class="sub">Choose a city to see the best blend for each month.</p>
+  <section id="view-blend" style="padding:0">
+    <div class="panel" style="margin-bottom:20px">
+      <h2>Blend by month</h2>
+      <label for="citysel">City</label><select id="citysel"></select><div id="cstatus" class="hint" aria-live="polite"></div>
+      <svg id="grid" viewBox="0 0 560 250" role="img" aria-label="Which ethanol blend fits each month for the chosen city" style="width:100%;height:auto;display:block;margin:14px 0 8px"></svg>
+      <div id="gridnote" class="src"></div>
+    </div>
+    <div class="panel" style="margin-bottom:20px">
+      <h2>Where your city sits</h2>
+      <p class="sub" style="margin:0 0 8px;font-size:.95rem">Each dot is a month. The coloured areas show which blend the framework picks. Striped areas are combinations it has no rule for. Tap a dot to load that month below.</p>
+      <svg id="map" viewBox="0 0 560 380" role="img" aria-label="Map of ethanol blend zones by temperature and relative humidity" style="width:100%;height:auto;display:block"></svg>
+      <div id="mapnote" class="src" style="margin-top:8px"></div>
+    </div>
+    <div class="grid">
+      <div class="panel">
+        <h2>Or try your own numbers</h2>
+        <label for="temp">Temperature: <span class="val" id="tempv"></span></label>
+        <input class="range" type="range" id="temp" min="0" max="45" step="1" value="31">
+        <label for="rh">Relative humidity: <span class="val" id="rhv"></span></label>
+        <input class="range" type="range" id="rh" min="0" max="100" step="1" value="75">
+      </div>
+      <div class="panel result" id="bresult" aria-live="polite"></div>
+    </div>
+  </section>
+  <p class="hint" id="srcnote" style="margin-top:18px">Climate data: <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener">NASA POWER</a>, modelled monthly averages for each city's coordinates. These are model values, not weather-station readings, so months close to a threshold are approximate.</p>
+</div></section>
+
+<section class="block about" id="about"><div class="wrap">
+  <h2 class="title">About this project</h2>
+  <p>This site comes from a student research paper asking to what extent the best ethanol-petrol blend for India depends on vehicle compatibility and regional climate, for ethanol made by microbial fermentation.</p>
+  <p>The blend rules here are a policy idea from that paper. They have not been tested against measured engine data, and they leave two gaps where no rule exists. Those are shown as striped areas. This is not an official fuel recommendation. Check your owner's manual for what your vehicle can use.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <strong>E20 Climate Fit</strong><br>A student research project on ethanol-petrol blends in India. Climate data from NASA POWER.<br>Made by Diya Karthik.
+</div></footer>
+<script>
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+// Regional blend tool: thresholds from the paper's framework
+function blend(T,RH){
+  if(RH>70) return {b:"E10",kind:"rule",why:"Relative humidity above 70% means higher water-absorption risk for ethanol, so the framework picks the lowest blend."};
+  if(RH>=40 && T>25) return {b:"E20",kind:"rule",why:"Moderate humidity (40-70%) with temperature above 25°C balances efficiency and water risk."};
+  if(RH<40 && T<=25) return {b:"E30",kind:"rule",why:"Low humidity and mild temperature (25°C or below) suit ethanol best, so the framework allows the highest blend."};
+  if(RH>=40 && T<=25) return {b:"E20",kind:"gap",why:"The framework has no rule for 40-70% humidity at 25°C or below. E20 is shown as a provisional middle value."};
+  return {b:"E20",kind:"gap",why:"The framework has no rule for humidity below 40% with temperature above 25°C. E20 is shown as a provisional middle value."};
+}
+function renderBlend(){
+  var T=+document.getElementById("temp").value, RH=+document.getElementById("rh").value;
+  document.getElementById("tempv").textContent=T+" °C";
+  document.getElementById("rhv").textContent=RH+" %";
+  var o=blend(T,RH);
+  document.getElementById("bresult").innerHTML=
+    '<span class="pill '+(o.kind==="rule"?"t-ready":"t-check")+'">'+(o.kind==="rule"?"Framework rule":"Gap in framework")+'</span>'+
+    '<div class="big">'+o.b+'</div><p>'+esc(o.why)+'</p>'+
+    '<div class="src">Thresholds: RH &gt; 70% → E10 · 40-70% and T &gt; 25°C → E20 · RH &lt; 40% and T ≤ 25°C → E30</div>';
+  if(typeof drawMap==="function") drawMap();
+}
+// Decision map (A) and real-city overlay (C)
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var CITIES={
+  "Delhi":{T:[13.9,17.8,23.3,28.9,32.8,33.3,31.7,30.6,29.4,26.1,20.6,15.6],RH:[43,40,31,22,22,35,61,74,69,50,41,39]},
+  "Mumbai":{T:[23.9,24.4,27.2,28.9,30.0,29.4,28.3,27.8,27.8,28.9,27.2,25.6],RH:[51,45,44,53,61,79,89,90,88,78,69,59]},
+  "Bengaluru":{T:[22.2,24.4,26.7,28.3,27.8,25.0,24.4,23.9,24.4,24.4,22.8,21.7],RH:[64,51,42,48,62,75,77,79,81,82,81,75]}
+};
+var curCity=null, curData=null, CACHE={};
+var CITYLIST={"Delhi":[28.61,77.21],"Mumbai":[19.08,72.88],"Bengaluru":[12.97,77.59],"Chennai":[13.08,80.27],"Kolkata":[22.57,88.36],"Hyderabad":[17.39,78.49],"Pune":[18.52,73.86],"Ahmedabad":[23.02,72.57],"Jaipur":[26.91,75.79],"Lucknow":[26.85,80.95],"Chandigarh":[30.73,76.78],"Shimla":[31.10,77.17],"Srinagar":[34.08,74.80],"Bhopal":[23.26,77.41],"Nagpur":[21.15,79.09],"Patna":[25.59,85.14],"Guwahati":[26.14,91.74],"Bhubaneswar":[20.30,85.82],"Visakhapatnam":[17.69,83.22],"Kochi":[9.93,76.27],"Thiruvananthapuram":[8.52,76.94],"Coimbatore":[11.02,76.96],"Goa (Panaji)":[15.50,73.83],"Jodhpur":[26.24,73.02],"Dehradun":[30.32,78.03],"Ranchi":[23.34,85.31],"Raipur":[21.25,81.63],"Leh":[34.16,77.58],"Shillong":[25.58,91.89],"Indore":[22.72,75.86]};
+var MX={l:46,r:12,t:12,b:44,W:560,H:380}, TMIN=5,TMAX=40;
+function mx(T){return MX.l+(T-TMIN)/(TMAX-TMIN)*(MX.W-MX.l-MX.r);}
+function my(R){return MX.H-MX.b-R/100*(MX.H-MX.t-MX.b);}
+function drawMap(){
+  var s='<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="var(--surface)"/><line x1="0" y1="0" x2="0" y2="8" stroke="var(--muted)" stroke-width="2" opacity=".55"/></pattern></defs>';
+  var x25=mx(25),x0=mx(TMIN),x1=mx(TMAX),y70=my(70),y40=my(40),y0=my(0),y100=my(100);
+  s+='<rect x="'+x0+'" y="'+y100+'" width="'+(x1-x0)+'" height="'+(y70-y100)+'" fill="var(--likely-soft)"/>';
+  s+='<rect x="'+x25+'" y="'+y70+'" width="'+(x1-x25)+'" height="'+(y40-y70)+'" fill="var(--eth-soft)"/>';
+  s+='<rect x="'+x0+'" y="'+y40+'" width="'+(x25-x0)+'" height="'+(y0-y40)+'" fill="var(--pet-soft)"/>';
+  s+='<rect x="'+x0+'" y="'+y70+'" width="'+(x25-x0)+'" height="'+(y40-y70)+'" fill="url(#hatch)"/>';
+  s+='<rect x="'+x25+'" y="'+y40+'" width="'+(x1-x25)+'" height="'+(y0-y40)+'" fill="url(#hatch)"/>';
+  s+='<rect x="'+x0+'" y="'+y100+'" width="'+(x1-x0)+'" height="'+(y0-y100)+'" fill="none" stroke="var(--line)"/>';
+  function lab(x,y,t,c){return '<text x="'+x+'" y="'+y+'" fill="'+c+'" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle">'+t+'</text>';}
+  s+=lab((x0+x1)/2,(y100+y70)/2+5,"E10 · RH above 70%","var(--likely)");
+  s+=lab((x25+x1)/2,(y70+y40)/2+5,"E20","var(--eth)");
+  s+=lab((x0+x25)/2,(y40+y0)/2+5,"E30","var(--pet)");
+  s+='<g font-family="Inter,sans-serif" font-size="11" fill="var(--muted)" text-anchor="middle">';
+  s+='<text x="'+(x0+x25)/2+'" y="'+((y70+y40)/2+4)+'" style="paint-order:stroke" stroke="var(--surface)" stroke-width="4">gap</text>';
+  s+='<text x="'+(x25+x1)/2+'" y="'+((y40+y0)/2+4)+'" style="paint-order:stroke" stroke="var(--surface)" stroke-width="4">gap</text></g>';
+  var i,tk;
+  s+='<g font-family="Inter,sans-serif" font-size="11" fill="var(--muted)">';
+  for(i=5;i<=40;i+=5){s+='<text x="'+mx(i)+'" y="'+(y0+16)+'" text-anchor="middle">'+i+'</text>';}
+  for(i=0;i<=100;i+=20){s+='<text x="'+(x0-6)+'" y="'+(my(i)+4)+'" text-anchor="end">'+i+'</text>';}
+  s+='<text x="'+((x0+x1)/2)+'" y="'+(MX.H-6)+'" text-anchor="middle">Temperature (°C)</text>';
+  s+='<text transform="translate(12 '+((y0+y100)/2)+') rotate(-90)" text-anchor="middle">Relative humidity (%)</text></g>';
+  var tv=+document.getElementById("temp").value, rv=+document.getElementById("rh").value;
+  if(curData){
+    var c=curData, pts="";
+    for(i=0;i<12;i++){pts+=mx(c.T[i])+","+my(c.RH[i])+" ";}
+    s+='<polygon points="'+pts+'" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".6"/>';
+    for(i=0;i<12;i++){
+      s+='<g tabindex="0" role="button" aria-label="'+curCity+' '+MON[i]+': '+c.T[i]+' degrees, '+c.RH[i]+' percent humidity" style="cursor:pointer" onclick="pickMonth('+i+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();pickMonth('+i+');}">'+
+        '<circle cx="'+mx(c.T[i])+'" cy="'+my(c.RH[i])+'" r="11" fill="transparent"/>'+
+        '<circle cx="'+mx(c.T[i])+'" cy="'+my(c.RH[i])+'" r="5" fill="var(--ink)" stroke="var(--bg)" stroke-width="2"/>'+
+        '<text x="'+mx(c.T[i])+'" y="'+(my(c.RH[i])-9)+'" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" fill="var(--ink)" style="paint-order:stroke" stroke="var(--surface)" stroke-width="3">'+MON[i]+'</text></g>';
+    }
+  }
+  s+='<circle cx="'+mx(tv)+'" cy="'+my(rv)+'" r="7" fill="none" stroke="var(--ink)" stroke-width="2.5"/><circle cx="'+mx(tv)+'" cy="'+my(rv)+'" r="2" fill="var(--ink)"/>';
+  document.getElementById("map").innerHTML=s;
+  var note="";
+  if(curData){
+    var cnt={E10:0,E20:0,E30:0,gap:0},c2=curData;
+    for(i=0;i<12;i++){var o=blend(c2.T[i],c2.RH[i]); if(o.kind==="gap")cnt.gap++; else cnt[o.b]++;}
+    note=curCity+": "+cnt.E10+" months E10, "+cnt.E20+" E20, "+cnt.E30+" E30, "+cnt.gap+" in a gap. Ring = current slider values.";
+  } else note="Ring = current slider values. Choose a city to overlay its months.";
+  document.getElementById("mapnote").textContent=note;
+}
+function pickMonth(i){
+  var c=curData;
+  document.getElementById("temp").value=Math.round(c.T[i]);
+  document.getElementById("rh").value=Math.round(c.RH[i]);
+  renderBlend();
+}
+function drawGrid(){
+  var g=document.getElementById("grid"); if(!curData){g.innerHTML="";document.getElementById("gridnote").textContent="Choose a city above to see which blend fits each month.";return;}
+  var L=64,T0=26,cw=(560-L-8)/12,rh=54,rows=["E10","E20","E30"],s="",i,r;
+  var colr={E10:"var(--likely)",E20:"var(--eth)",E30:"var(--pet)"},soft={E10:"var(--likely-soft)",E20:"var(--eth-soft)",E30:"var(--pet-soft)"};
+  s+='<defs><pattern id="h2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--pet)" stroke-width="2"/></pattern></defs>';
+  for(i=0;i<12;i++) s+='<text x="'+(L+cw*i+cw/2)+'" y="16" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="var(--muted)">'+MON[i]+'</text>';
+  for(r=0;r<3;r++){
+    s+='<text x="'+(L-8)+'" y="'+(T0+rh*r+rh/2+5)+'" text-anchor="end" font-family="Poppins,sans-serif" font-weight="800" font-size="18" fill="'+colr[rows[r]]+'">'+rows[r]+'</text>';
+    for(i=0;i<12;i++) s+='<rect x="'+(L+cw*i+2)+'" y="'+(T0+rh*r+2)+'" width="'+(cw-4)+'" height="'+(rh-4)+'" rx="4" fill="var(--surface)" stroke="var(--line)"/>';
+  }
+  for(i=0;i<12;i++){
+    var o=blend(curData.T[i],curData.RH[i]), r2=rows.indexOf(o.b), x=L+cw*i+2, y=T0+rh*r2+2;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+(cw-4)+'" height="'+(rh-4)+'" rx="4" fill="'+colr[o.b]+'"/>';
+    if(o.kind==="gap") s+='<rect x="'+x+'" y="'+y+'" width="'+(cw-4)+'" height="'+(rh-4)+'" rx="4" fill="url(#h2)" opacity=".5"/>';
+    s+='<text x="'+(L+cw*i+cw/2)+'" y="'+(T0+rh*3+16)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)">'+Math.round(curData.T[i])+'°</text>';
+    s+='<text x="'+(L+cw*i+cw/2)+'" y="'+(T0+rh*3+30)+'" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)">'+Math.round(curData.RH[i])+'%</text>';
+  }
+  s+='<text x="'+(L-8)+'" y="'+(T0+rh*3+16)+'" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="var(--ink)">Temp</text><text x="'+(L-8)+'" y="'+(T0+rh*3+30)+'" text-anchor="end" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)">Humidity</text>';
+  g.innerHTML=s;
+  document.getElementById("gridnote").textContent=curCity+": filled square = blend the framework picks. Striped squares are months in a framework gap, where E20 is only a provisional value.";
+}
+function setCity(name,d,src){
+  curCity=name; curData=d;
+  document.getElementById("cstatus").textContent=src||"";
+  drawGrid(); drawMap();
+}
+function loadCity(name){
+  var st=document.getElementById("cstatus");
+  if(!name){curCity=null;curData=null;st.textContent="";drawGrid();drawMap();return;}
+  if(CACHE[name]){setCity(name,CACHE[name],"Source: NASA POWER monthly climatology.");return;}
+  st.textContent="Loading climate data for "+name+"…";
+  var ll=CITYLIST[name];
+  var url="https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,RH2M&community=RE&longitude="+ll[1]+"&latitude="+ll[0]+"&format=JSON";
+  fetch(url).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(function(j){
+    var p=j.properties.parameter,K=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],d={T:[],RH:[]};
+    K.forEach(function(k){var t=p.T2M[k],h=p.RH2M[k]; if(typeof t!=="number"||typeof h!=="number"||t<-90||h<0) throw new Error("bad data"); d.T.push(t);d.RH.push(h);});
+    CACHE[name]=d; if(document.getElementById("citysel").value===name) setCity(name,d,"Source: NASA POWER monthly climatology.");
+  }).catch(function(){
+    if(document.getElementById("citysel").value!==name) return;
+    if(CITIES[name]) setCity(name,CITIES[name],"Live data could not be loaded, so this is the saved fallback: temperature from 1991–2020 station normals, humidity modelled by NASA POWER (via climate-zone.com).");
+    else {curCity=null;curData=null;drawGrid();drawMap();st.textContent="Could not load climate data for "+name+" (no internet or NASA POWER is unavailable). Try again later.";}
+  });
+}
+function buildCityButtons(){
+  var sel=document.getElementById("citysel"),h='<option value="">Select a city…</option>';
+  Object.keys(CITYLIST).sort().forEach(function(k){h+='<option value="'+k+'">'+k+'</option>';});
+  sel.innerHTML=h; sel.onchange=function(){loadCity(sel.value);};
+}
+document.getElementById("temp").addEventListener("input",renderBlend);
+document.getElementById("rh").addEventListener("input",renderBlend);
+
+buildCityButtons(); drawGrid(); renderBlend();
+</script>
+</body>
+</html>
